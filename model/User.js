@@ -18,13 +18,9 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
-  role: {
-    type: String,
-    default: "user",
+  chatHistory: {
+    type: Array,
+    default: [],
   },
   refreshToken: String,
   accessToken: String,

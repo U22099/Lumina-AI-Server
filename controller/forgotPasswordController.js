@@ -1,40 +1,41 @@
-const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
-const User = require('../model/User.js');
+const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
+const User = require("../model/User.js");
 
 const generateRandomPassword = () => {
-    const char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let password = ''
-    for(let i = 0; i < 4; i++ ){
-        password += char.charAt(Math.floor(Math.random() * char.length));
-    }
-    return password;
-}
+  const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  let password = "";
+  for (let i = 0; i < 4; i++) {
+    password += char.charAt(Math.floor(Math.random() * char.length));
+  }
+  return password;
+};
 const sendEmail = async (req, res) => {
-    const email = req.body.input;
-    const user = await User.findOne({ email: email });
-    if (!user) return res.status(401).json({ "message": "No user found for this email" });
+  const email = req.body.input;
+  const user = await User.findOne({ email: email });
+  if (!user)
+    return res.status(401).json({ message: "No user found for this email" });
 
-    const password = generateRandomPassword();
-    const hash = await bcrypt.hash(password, 10);
-    user.password = hash;
-    await user.save();
-    let transportMail = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASSWORD
-        }
-    });
-    
-    let mailContent = {
-        from:{
-	    name: "Melodia",
-	    address: process.env.EMAIL
-	},
-        to: email,
-        subject: 'New Password Request From Melodia',
-        html: `
+  const password = generateRandomPassword();
+  const hash = await bcrypt.hash(password, 10);
+  user.password = hash;
+  await user.save();
+  let transportMail = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  let mailContent = {
+    from: {
+      name: "Melodia",
+      address: process.env.EMAIL,
+    },
+    to: email,
+    subject: "New Password Request From Melodia",
+    html: `
          <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -43,7 +44,7 @@ const sendEmail = async (req, res) => {
             <title>New Password</title>
             <style>
                 h1, span{
-                    color: #1db954;
+                    color: #4567b7;
                 }
                 header, main{
                     display: flex;
@@ -80,17 +81,17 @@ const sendEmail = async (req, res) => {
             </main>
         </body>
         </html>
-        `
+        `,
+  };
+
+  transportMail.sendMail(mailContent, (err, val) => {
+    if (err) {
+      res.status(500).json({ message: err });
+      console.log(err);
+    } else {
+      res.sendStatus(200);
     }
+  });
+};
 
-    transportMail.sendMail(mailContent, (err, val) => {
-        if(err){
-            res.status(500).json({"message": err});
-            console.log(err);
-        } else {
-            res.sendStatus(200);
-        }
-    })
-}
-
-module.exports = {sendEmail}
+module.exports = { sendEmail };
