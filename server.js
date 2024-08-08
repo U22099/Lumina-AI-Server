@@ -28,6 +28,7 @@ app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 app.use(verifyJWT);
 app.use("/user", require("./routes/user"));
+app.use("/chat", require("./routes/chat"));
 
 app.use((err, req, res, next) => {
   console.log(`${err.stack}`);
