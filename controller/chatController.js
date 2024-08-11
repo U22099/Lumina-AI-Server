@@ -25,12 +25,15 @@ const TextPrompt = async (req, res) => {
       history,
     });
 
-    const result = await chat.sendMessage(message.parts);
+    const result = await chat.sendMessage(message);
     const response = await result.response;
     const text = response.text();
     user.chatHistory = [
       ...history,
-      message,
+      {
+        role: "user",
+        parts: [{ message}],
+      },
       {
         role: "model",
         parts: [{ text }],
