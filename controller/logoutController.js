@@ -11,6 +11,18 @@ const logOut = async (req, res) => {
     user.refreshToken = "";
     user.accessToken = "";
     await user.save();
+    res.cookie("refreshToken", "", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 1000,
+    });
+    res.cookie("refreshToken", "", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 1000,
+    });
   }
 
   res.sendStatus(200);

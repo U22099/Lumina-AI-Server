@@ -2,9 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/User");
 
 const handleRefreshToken = async (req, res) => {
-  const refreshToken =
-    req.headers.Authorization?.split(" ")[1] ||
-    req.headers.authorization?.split(" ")[1];
+  const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.sendStatus(401);
   const user = await User.findOne({ refreshToken: refreshToken });
 
@@ -14,7 +12,7 @@ const handleRefreshToken = async (req, res) => {
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     async (err, decoded) => {
-      if (err || user.username !== decoded.username) return res.redirect("/");
+      if (err || user.username !== decoded.username) return res.sendStatus(403);
       const accessToken = jwt.sign(
         { username: user.username },
         process.env.ACCESS_TOKEN_SECRET,
@@ -23,8 +21,11 @@ const handleRefreshToken = async (req, res) => {
       user.accessToken = accessToken;
       user.markModified("accessToken");
       await user.save();
-      res.status(200).json({
-        accessToken: accessToken,
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        maxAge: 5 * 60 * 60 * 1000,
       });
     }
   );

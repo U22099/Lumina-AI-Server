@@ -1,9 +1,7 @@
 const User = require("../model/User");
 
 const getData = async (req, res) => {
-  const accessToken =
-    req.headers.Authorization?.split(" ")[1] ||
-    req.headers.authorization?.split(" ")[1];
+  const accessToken = req.cookies.accessToken;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
@@ -19,9 +17,7 @@ const getData = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   try {
-    const accessToken =
-      req.headers.Authorization?.split(" ")[1] ||
-      req.headers.authorization?.split(" ")[1];
+    const accessToken = req.cookies.accessToken;
     if (!accessToken) return res.sendStatus(401);
     await User.findOneAndDelete({ accessToken: accessToken });
     return res.sendStatus(200);

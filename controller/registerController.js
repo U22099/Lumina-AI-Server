@@ -39,11 +39,17 @@ const handleNewUser = async (req, res) => {
       refreshToken: refreshToken,
       accessToken: accessToken,
     });
-    res.status(200).json({
-      token: {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      },
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 5 * 60 * 60 * 1000,
+    });
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 5 * 60 * 60 * 1000,
     });
   } catch (error) {
     console.log(error);
