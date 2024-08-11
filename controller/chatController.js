@@ -32,7 +32,7 @@ const TextPrompt = async (req, res) => {
       ...history,
       {
         role: "user",
-        parts: [{ message}],
+        parts: [{ text: message}],
       },
       {
         role: "model",
@@ -40,7 +40,7 @@ const TextPrompt = async (req, res) => {
       },
     ];
     await user.save();
-     res.send(text);
+    res.send(text);
   } else {
     res.status(401).json({ message: "Wrong Token" });
   }
