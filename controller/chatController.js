@@ -17,7 +17,7 @@ const TextPrompt = async (req, res) => {
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
-    const genAI = new GoogleGenerativeAI(process.env.GEMMA_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const { history, message } = req.body;
@@ -48,7 +48,7 @@ const ImagePrompt = async (req, res) => {
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
-    const genAI = new GoogleGenerativeAI(process.env.GEMMA_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const { history, image, message } = req.body;
