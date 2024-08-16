@@ -19,7 +19,6 @@ const handleRefreshToken = async (req, res) => {
         { expiresIn: "5h" }
       );
       user.accessToken = accessToken;
-      user.markModified("accessToken");
       await user.save();
       res.cookie("accessToken", accessToken, {
         httpOnly: true,
@@ -27,6 +26,7 @@ const handleRefreshToken = async (req, res) => {
         secure: true,
         maxAge: 5 * 60 * 60 * 1000,
       });
+      res.sendStatus(200);
     }
   );
 };
