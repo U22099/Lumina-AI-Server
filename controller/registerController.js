@@ -51,6 +51,7 @@ const handleNewUser = async (req, res) => {
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
