@@ -32,25 +32,27 @@ const handleLogin = async (req, res) => {
       );
 
       user.refreshToken = refreshToken;
-      user.accessToken = accessToken;
-      user.markModified(["refreshToken", "accessToken"]);
       await user.save();
+      console.log("Timing 1");
       res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         sameSite: "None",
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
+      console.log("Timing 2");
     }
     user.accessToken = accessToken;
-    user.markModified("accessToken");
     await user.save();
+    console.log("Timing 3");
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });
+    console.log("Timing 4");
+    res.sendStatus(200);
   } else {
     res.status(401).json({ message: "Incorrect Password" });
   }
