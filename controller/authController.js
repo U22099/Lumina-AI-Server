@@ -35,7 +35,7 @@ const handleLogin = async (req, res) => {
       await user.save();
       res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "None",
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
@@ -44,7 +44,7 @@ const handleLogin = async (req, res) => {
     await user.save();
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });
