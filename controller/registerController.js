@@ -39,7 +39,7 @@ const handleNewUser = async (req, res) => {
       refreshToken: refreshToken,
       accessToken: accessToken,
     });
-    res.cookie("refreshToken", refreshToken, {
+    /*res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
@@ -50,8 +50,8 @@ const handleNewUser = async (req, res) => {
       sameSite: "None",
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
-    });
-    res.sendStatus(200);
+    });*/
+    res.json({accessToken, refreshToken});
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
