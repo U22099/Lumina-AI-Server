@@ -2,7 +2,7 @@ const User = require("../model/User");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const getChats = async (req, res) => {
-  const accessToken = req.cookies.accessToken;
+  const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
@@ -13,7 +13,7 @@ const getChats = async (req, res) => {
   }
 };
 const TextPrompt = async (req, res) => {
-  const accessToken = req.cookies.accessToken;
+  const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
@@ -47,7 +47,7 @@ const TextPrompt = async (req, res) => {
 };
 
 const ImagePrompt = async (req, res) => {
-  const accessToken = req.cookies.accessToken;
+  const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
