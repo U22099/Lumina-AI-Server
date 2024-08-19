@@ -1,7 +1,7 @@
 const User = require("../model/User");
 
 const getData = async (req, res) => {
-  const accessToken = req.cookies.accessToken;
+  const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
@@ -17,7 +17,7 @@ const getData = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   try {
-    const accessToken = req.cookies.accessToken;
+    const accessToken = req.query.token;
     if (!accessToken) return res.sendStatus(401);
     await User.findOneAndDelete({ accessToken: accessToken });
     return res.sendStatus(200);
