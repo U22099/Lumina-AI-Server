@@ -33,22 +33,22 @@ const handleLogin = async (req, res) => {
 
       user.refreshToken = refreshToken;
       await user.save();
-      res.cookie("refreshToken", refreshToken, {
+      /*res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         sameSite: "None",
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
+      });*/
     }
     user.accessToken = accessToken;
     await user.save();
-    res.cookie("accessToken", accessToken, {
+    /*res.cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
-    });
-    res.sendStatus(200);
+    });*/
+    res.json({accessToken, refreshToken});
   } else {
     res.status(401).json({ message: "Incorrect Password" });
   }
