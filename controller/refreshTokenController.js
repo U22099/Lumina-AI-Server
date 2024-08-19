@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/User");
 
 const handleRefreshToken = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
+  const refreshToken = req.query.token;
   if (!refreshToken) return res.sendStatus(401);
   const user = await User.findOne({ refreshToken: refreshToken });
 
@@ -20,13 +20,13 @@ const handleRefreshToken = async (req, res) => {
       );
       user.accessToken = accessToken;
       await user.save();
-      res.cookie("accessToken", accessToken, {
+      /*res.cookie("accessToken", accessToken, {
         httpOnly: true,
         sameSite: "None",
         secure: true,
         maxAge: 5 * 60 * 60 * 1000,
-      });
-      res.sendStatus(200);
+      });*/
+      res.json({token: accessToken});
     }
   );
 };
