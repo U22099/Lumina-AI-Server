@@ -18,7 +18,7 @@ const handleLogin = async (req, res) => {
 
   const match = await bcrypt.compare(password, user.password);
   if (match) {
-    let refreshToken;
+    let refreshToken = '';
     const accessToken = jwt.sign(
       { username: user.username },
       process.env.ACCESS_TOKEN_SECRET,
@@ -48,7 +48,10 @@ const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });*/
-    res.json({accessToken, refreshToken});
+    res.json({
+      accessToken: accessToken, 
+      refreshToken: refreshToken
+    });
   } else {
     res.status(401).json({ message: "Incorrect Password" });
   }
