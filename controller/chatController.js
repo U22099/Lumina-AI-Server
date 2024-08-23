@@ -12,6 +12,17 @@ const getChats = async (req, res) => {
     res.status(401).json({ message: "Wrong Token" });
   }
 };
+const clearChats = async (req, res) => {
+  const accessToken = req.query.token;
+  if (!accessToken) return res.sendStatus(401);
+  const user = await User.findOne({ accessToken: accessToken });
+  if (user) {
+    user.chatHistory = [];
+    res.sendStatus(200);
+  } else {
+    res.status(401).json({ message: "Wrong Token" });
+  }
+};
 const TextPrompt = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
@@ -78,4 +89,4 @@ const ImagePrompt = async (req, res) => {
   }
 };
 
-module.exports = { getChats, TextPrompt, ImagePrompt };
+module.exports = { getChats, clearChats, TextPrompt, ImagePrompt };

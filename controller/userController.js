@@ -15,6 +15,18 @@ const getData = async (req, res) => {
     res.sendStatus(403);
   }
 };
+const updateImage = async (req, res) => {
+  const accessToken = req.query.token;
+  if (!accessToken) return res.sendStatus(401);
+  const user = await User.findOne({ accessToken: accessToken });
+  if (user) {
+    user.image = req.body.image;
+    await user.save();
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(403);
+  }
+};
 const deleteUser = async (req, res) => {
   try {
     const accessToken = req.query.token;
@@ -26,4 +38,4 @@ const deleteUser = async (req, res) => {
     return res.status(500).json({ message: "Failed to delete user" });
   }
 };
-module.exports = { getData, deleteUser };
+module.exports = { getData, updateImage, deleteUser };
