@@ -45,7 +45,7 @@ const TextPrompt = async (req, res) => {
             parts: [{
                 text: 'Understood! so how may i help you today'
             }]
-        }
+        },
 		...history
 	],
     });
@@ -93,7 +93,7 @@ const ImagePrompt = async (req, res) => {
             parts: [{
                 text: 'Understood! so how may i help you today'
             }]
-        }
+        },
 		...history
 	],
     });
