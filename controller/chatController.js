@@ -33,7 +33,21 @@ const TextPrompt = async (req, res) => {
 
     const { history, message } = req.body;
     const chat = model.startChat({
-      history,
+      history: [
+		{
+            role: 'user',
+            parts: [{
+                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api. If you are asked for his my portfolio link here it is --https://u22099.github.io/Portfolio2. Daniel is a fullstack web developer that uses MERN stack'
+            }]
+        },
+        {
+            role: 'model',
+            parts: [{
+                text: 'Understood! so how may i help you today'
+            }]
+        }
+		...history
+	],
     });
 
     const result = await chat.sendMessage(message);
@@ -67,7 +81,21 @@ const ImagePrompt = async (req, res) => {
 
     const { history, image, message } = req.body;
     const chat = model.startChat({
-      history,
+      history: [
+		{
+            role: 'user',
+            parts: [{
+                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api.'
+            }]
+        },
+        {
+            role: 'model',
+            parts: [{
+                text: 'Understood! so how may i help you today'
+            }]
+        }
+		...history
+	],
     });
 
     const result = await chat.sendMessage([message, image]);
