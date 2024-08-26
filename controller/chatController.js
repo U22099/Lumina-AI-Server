@@ -79,10 +79,10 @@ const ImagePrompt = async (req, res) => {
     const { history, image, message } = req.body;
     const chat = model.startChat({
       history: [
-		{
+		    {
             role: 'user',
             parts: [{
-                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api.'
+                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api. He was assisted by a designer named Swag. If you are asked for Daniel\'s my portfolio link here it is --https://u22099.github.io/Portfolio2. Daniel is a fullstack web developer that uses MERN stack'
             }]
         },
         {
