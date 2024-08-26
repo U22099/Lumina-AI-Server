@@ -7,9 +7,7 @@ const getData = async (req, res) => {
   if (user) {
     res.json({
       username: user.username,
-      email: user.email,
-      image: user.image,
-      chatHistory: user.chatHistory,
+      image: user.image
     });
   } else {
     res.sendStatus(403);
