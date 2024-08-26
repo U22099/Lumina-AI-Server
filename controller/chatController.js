@@ -57,7 +57,7 @@ Make sure that all your replies are in html formatted format suitable for insert
 		...history
 	],
     });
-
+	try{
     const result = await chat.sendMessage(message);
     const response = await result.response;
     const text = response.text();
@@ -70,6 +70,9 @@ Make sure that all your replies are in html formatted format suitable for insert
     ];
     await user.save();
     res.send(text);
+	} catch (e){
+		res.sendStatus(500);
+	}
   } else {
     res.status(401).json({ message: "Wrong Token" });
   }
