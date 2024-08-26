@@ -18,6 +18,7 @@ const clearChats = async (req, res) => {
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
     user.chatHistory = [];
+	 user.save();
     res.sendStatus(200);
   } else {
     res.status(401).json({ message: "Wrong Token" });
@@ -55,10 +56,6 @@ const TextPrompt = async (req, res) => {
     const text = response.text();
     user.chatHistory = [
       ...history,
-      {
-        role: "user",
-        parts: [{ text: message}],
-      },
       {
         role: "model",
         parts: [{ text }],
@@ -103,10 +100,6 @@ const ImagePrompt = async (req, res) => {
     const text = response.text();
     user.chatHistory = [
       ...history,
-      {
-        role: "user",
-        parts: [{ image }, { text: message }],
-      },
       {
         role: "model",
         parts: [{ text }],
