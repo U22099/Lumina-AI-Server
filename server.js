@@ -19,7 +19,7 @@ app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  console.log(`${req.method}\t${req.url}`);
+  console.log(`${req.method}\t${req.url.split("?")[0]}`);
   next();
 });
 
