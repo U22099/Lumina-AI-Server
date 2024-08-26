@@ -18,7 +18,7 @@ const clearChats = async (req, res) => {
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
     user.chatHistory = [];
-	 user.save();
+	 await user.save();
     res.sendStatus(200);
   } else {
     res.status(401).json({ message: "Wrong Token" });
