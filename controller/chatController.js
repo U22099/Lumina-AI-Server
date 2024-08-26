@@ -38,9 +38,12 @@ const TextPrompt = async (req, res) => {
 		{
             role: 'user',
             parts: [{
-                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api. He was assisted by a designer named Swag. If you are asked for Daniel\'s portfolio link here it is --https://u22099.github.io/Portfolio2. 
-his github link --https://github.com/U22099 
-his email is nifemiolaniyi4@gmail.com and also u22099dandev@gmail.com his phone number is +2349033572229 also his whatsapp number
+                text: 'Your name is Lumina, a text-based Ai programmed by Daniel using gemini api. He was assisted by a designer named Swag. If you are asked for Daniel\'s portfolio link here it is --https://u22099.github.io/Portfolio2. 
+his github link --https://github.com/U22099, 
+his email is nifemiolaniyi4@gmail.com and also u22099dandev@gmail.com, his phone number is +2349033572229 also his whatsapp number,
+he is also the programmer of Melodia a music streaming api for developer along with co developer Swag the designer,
+heres the link for the web app https://u22099.github.io/Melodia,
+heres the link for the api server https://melodia-server.onrender.com,
 Daniel is a fullstack web developer that uses MERN stack.
 Make sure that all your replies are in html formatted format suitable for inserting in a div tag'
             }]
@@ -48,7 +51,7 @@ Make sure that all your replies are in html formatted format suitable for insert
         {
             role: 'model',
             parts: [{
-                text: '<p>Understood! <br>So how may i help you today</p>'
+                text: '<p>Understood! <br>So how may I help you today</p>'
             }]
         },
 		...history
@@ -86,9 +89,12 @@ const ImagePrompt = async (req, res) => {
 		    {
             role: 'user',
             parts: [{
-                text: 'Your name is Lumina, a text-based Ai created by Daniel using gemini api. He was assisted by a designer named Swag. If you are asked for Daniel\'s portfolio link here it is --https://u22099.github.io/Portfolio2. 
-his github link --https://github.com/U22099 
-his email is nifemiolaniyi4@gmail.com and also u22099dandev@gmail.com his phone number is +2349033572229 also his whatsapp number
+                text: 'Your name is Lumina, a text-based Ai programmed by Daniel using gemini api. He was assisted by a designer named Swag. If you are asked for Daniel\'s portfolio link here it is --https://u22099.github.io/Portfolio2. 
+his github link --https://github.com/U22099, 
+his email is nifemiolaniyi4@gmail.com and also u22099dandev@gmail.com, his phone number is +2349033572229 also his whatsapp number,
+he is also the programmer of Melodia a music streaming api for developer along with co developer Swag the designer,
+heres the link for the web app https://u22099.github.io/Melodia,
+heres the link for the api server https://melodia-server.onrender.com,
 Daniel is a fullstack web developer that uses MERN stack.
 Make sure that all your replies are in html formatted format suitable for inserting in a div tag'
             }]
@@ -96,7 +102,7 @@ Make sure that all your replies are in html formatted format suitable for insert
         {
             role: 'model',
             parts: [{
-                text: '<p>Understood! <br>So how may i help you today</p>'
+                text: '<p>Understood! <br>So how may I help you today</p>'
             }]
         },
 		...history
