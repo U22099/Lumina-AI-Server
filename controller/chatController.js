@@ -30,7 +30,7 @@ const TextPrompt = async (req, res) => {
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const { history, message } = req.body;
     const chat = model.startChat({
@@ -80,7 +80,7 @@ const ImagePrompt = async (req, res) => {
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const { history, image, message } = req.body;
     const chat = model.startChat({
