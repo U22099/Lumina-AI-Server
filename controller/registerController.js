@@ -24,12 +24,12 @@ const handleNewUser = async (req, res) => {
     const accessToken = jwt.sign(
       { username: username },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5h" }
+      { expiresIn: "1d" }
     );
     const refreshToken = jwt.sign(
       { username: username },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1w" }
+      { expiresIn: "7d" }
     );
     await User.create({
       username: username,
