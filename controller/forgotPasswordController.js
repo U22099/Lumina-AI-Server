@@ -5,7 +5,7 @@ const User = require("../model/User.js");
 const generateRandomPassword = () => {
   const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   let password = "";
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     password += char.charAt(Math.floor(Math.random() * char.length));
   }
   return password;
@@ -30,11 +30,11 @@ const sendEmail = async (req, res) => {
 
   let mailContent = {
     from: {
-      name: "Melodia",
+      name: "Lumina Ai",
       address: process.env.EMAIL,
     },
     to: email,
-    subject: "New Password Request From Melodia",
+    subject: "New Password Request From Lumina AI",
     html: `
          <!DOCTYPE html>
         <html lang="en">
@@ -44,7 +44,7 @@ const sendEmail = async (req, res) => {
             <title>New Password</title>
             <style>
                 h1, span{
-                    color: #4567b7;
+                    color: #b871fd;
                 }
                 header, main{
                     display: flex;
@@ -57,10 +57,10 @@ const sendEmail = async (req, res) => {
                     align-items: center;
                     padding: 10px 20px;
                     border-radius: 7px;
-                    background-color: hsl(0,5%,10%);
-							margin: 0px 10px;
-							font-weight: 700;
-							font-size: 2em;
+                    background-color: #1e1e24;
+			margin: 0px 10px;
+			font-weight: 700;
+			font-size: 2em;
                 }
                 main:first-child{
                     color: white;
