@@ -5,6 +5,7 @@ const chatController = require('../controller/chatController')
 router.get('/', chatController.getChats);
 router.delete('/', chatController.clearChats);
 router.post('/text', chatController.TextPrompt);
+router.post('/voice', chatController.VoicePrompt);
 router.post('/image', chatController.ImagePrompt);
 
 module.exports = router;
