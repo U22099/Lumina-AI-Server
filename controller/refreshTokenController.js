@@ -12,11 +12,11 @@ const handleRefreshToken = async (req, res) => {
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     async (err, decoded) => {
-      if (err || user.username !== decoded.username) return res.sendStatus(403);
+      if (err || (user.username !== decoded.username)) return res.sendStatus(403);
       const accessToken = jwt.sign(
         { username: user.username },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "5h" }
+        { expiresIn: "1d" }
       );
       user.accessToken = accessToken;
       await user.save();
@@ -24,7 +24,7 @@ const handleRefreshToken = async (req, res) => {
         httpOnly: true,
         sameSite: "None",
         secure: true,
-        maxAge: 5 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,
       });*/
       res.json({token: accessToken});
     }
