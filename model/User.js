@@ -22,6 +22,10 @@ const userSchema = new Schema({
     type: Array,
     default: [],
   },
+  voiceHistory: {
+    type: Array,
+    default: [],
+  },
   refreshToken: String,
   accessToken: String,
 });
