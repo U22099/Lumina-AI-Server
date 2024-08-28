@@ -139,4 +139,4 @@ Make sure that all your replies are in html formatted format suitable for insert
   }
 };
 
-module.exports = { getChats, clearChats, TextPrompt, voicePrompt, ImagePrompt };
+module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, ImagePrompt };
