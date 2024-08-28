@@ -22,13 +22,13 @@ const handleLogin = async (req, res) => {
     const accessToken = jwt.sign(
       { username: user.username },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5h" }
+      { expiresIn: "1d" }
     );
     if (rememberMe) {
       refreshToken = jwt.sign(
         { username: user.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "1w" }
+        { expiresIn: "7d" }
       );
 
       user.refreshToken = refreshToken;
@@ -46,7 +46,7 @@ const handleLogin = async (req, res) => {
       httpOnly: true,
       sameSite: "None",
       secure: true,
-      maxAge: 5 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000,
     });*/
     res.json({
       accessToken: accessToken, 
