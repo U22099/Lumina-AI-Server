@@ -105,6 +105,9 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
         parts: [{ text }],
       },
     ];
+	if(user.voiceHistory.length > 120){
+		user.voiceHistory = user.voiceHistory.slice(-120);
+	}
     await user.save();
     res.send(text);
   } else {
@@ -112,7 +115,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
   }
 };
 
-const ImagePrompt = async (req, res) => {
+const FilePrompt = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
   const user = await User.findOne({ accessToken: accessToken });
@@ -135,24 +138,13 @@ Message Tone:
 Your tone should be cool lively and compassionate. Act like a human, but also be professional and neat when it comes to that.`
     });
 
-    const { history, image, message } = req.body;
-    const chat = model.startChat({
-      history
-    });
+    const { file, message } = req.body;
 
-    const result = await chat.sendMessage([message, image]);
+    const result = await model.generateContent([message, file]);
     const response = await result.response;
     const text = response.text();
-    user.chatHistory = [
-      ...history,
-      {
-        role: "model",
-        parts: [{ text }],
-      },
-    ];
-    await user.save();
     res.send(text);
   }
 };
 
-module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, ImagePrompt };
+module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, FilePrompt };
