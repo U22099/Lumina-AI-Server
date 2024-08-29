@@ -47,15 +47,21 @@ Message Tone:
 Your tone should be cool lively and compassionate. Act like a human, but also be professional and neat when it comes to that.`
     });
 
-    const { history, message } = req.body;
+    const { message } = req.body;
     const chat = model.startChat({
-      history
+      history: [
+	      ...user.chatHistory,
+		  {
+        	role: "user",
+        	parts: [{ text: message }],
+      	  },
+	  ]
     });
     const result = await chat.sendMessage(message);
     const response = await result.response;
     const text = response.text();
     user.chatHistory = [
-      ...history,
+      ...user.chatHistory,
       {
         role: "model",
         parts: [{ text }],
