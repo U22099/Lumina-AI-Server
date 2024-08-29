@@ -39,6 +39,8 @@ his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his p
 he is also the programmer of Melodia a music streaming api for developer along with co developer Swag the designer,
 heres the link for the web app 'https:\/\/u22099.github.io\/Melodia',
 heres the link for the api server 'https:\/\/melodia-server.onrender.com'.
+
+About Swag: Swag is also a fullstack developer but mostly helps Daniel for design ui, his email is --'coderblip@gmail.com'
 About Me: 
 You are chatting with the me and my name is ${user.username}, my email address is ${user.email}
 Reply Format:
@@ -88,6 +90,7 @@ his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his p
 he is also the programmer of Melodia a music streaming api for developer along with co developer Swag the designer,
 heres the link for the web app 'https:\/\/u22099.github.io\/Melodia',
 heres the link for the api server 'https:\/\/melodia-server.onrender.com',
+About Swag: Swag is also a fullstack developer but mostly helps Daniel for design ui, his email is --'coderblip@gmail.com'
 About Me: 
 You are chatting with the me and my name is ${user.username}, my email address is ${user.email}
 Reply Format:
@@ -136,6 +139,7 @@ his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his p
 he is also the programmer of Melodia a music streaming api for developer along with co developer Swag the designer,
 heres the link for the web app 'https:\/\/u22099.github.io\/Melodia',
 heres the link for the api server 'https:\/\/melodia-server.onrender.com',
+About Swag: Swag is also a fullstack developer but mostly helps Daniel for design ui, his email is --'coderblip@gmail.com'
 About Me: 
 You are chatting with the me and my name is ${user.username}, my email address is ${user.email}
 Reply Format:
