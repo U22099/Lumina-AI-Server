@@ -65,6 +65,10 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
     user.chatHistory = [
       ...user.chatHistory,
       {
+        role: "user",
+        parts: [{ text: message}],
+      },
+      {
         role: "model",
         parts: [{ text }],
       },
