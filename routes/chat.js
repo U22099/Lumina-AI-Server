@@ -6,6 +6,6 @@ router.get('/', chatController.getChats);
 router.delete('/', chatController.clearChats);
 router.post('/text', chatController.TextPrompt);
 router.post('/voice', chatController.VoicePrompt);
-router.post('/image', chatController.ImagePrompt);
+router.post('/file', chatController.FilePrompt);
 
 module.exports = router;
