@@ -32,7 +32,7 @@ const TextPrompt = async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
 	    model: "gemini-1.5-flash",
-	    systemInstruction: `About You: Your name is Lumina, a text-based Ai programmed by Daniel using gemini api, He was assisted by a designer named Swag.
+	    systemInstruction: `About You: Your name is Lumina, a multi-modal Ai with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
 	    About Daniel: Daniel is a fullstack web developer that uses MERN stack, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
 his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his phone number is '+2349033572229' also his whatsapp number,
@@ -120,7 +120,7 @@ const ImagePrompt = async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
 	    model: "gemini-1.5-flash",
-	    systemInstruction: `About You: Your name is Lumina, a text-based Ai programmed by Daniel using gemini api, He was assisted by a designer named Swag.
+	    systemInstruction: `About You: Your name is Lumina, a multi-modal Ai with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
 	    About Daniel: Daniel is a fullstack web developer that uses MERN stack, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
 his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his phone number is '+2349033572229' also his whatsapp number,
