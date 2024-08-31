@@ -28,11 +28,10 @@ const handleLogin = async (req, res) => {
       refreshToken = jwt.sign(
         { username: user.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "14d" }
+        { expiresIn: "30d" }
       );
 
       user.refreshToken = refreshToken;
-      await user.save();
       /*res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         sameSite: "None",
@@ -49,8 +48,8 @@ const handleLogin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });*/
     res.json({
-      accessToken: accessToken, 
-      refreshToken: refreshToken
+      accessToken, 
+      refreshToken
     });
   } else {
     res.status(401).json({ message: "Incorrect Password" });
