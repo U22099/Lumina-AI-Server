@@ -44,7 +44,7 @@ About Swag: Swag is also a fullstack developer but mostly helps Daniel for desig
 About Me: 
 You are chatting with the me and my name is ${user.username}, my email address is ${user.email}
 Reply Format:
-Make sure that all your replies are in html formatted format suitable for inserting in a div tag, always format your responses in valid HTML, ready to be used inside a <div> tag. And no overflowing the container I repeat no overflowing texts or code snippets make sure to make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and the more to create visually appealing and engaging conversation. 
+Always format your responses in valid HTML, ready to be used inside a <div> tag. Make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and more to create visually appealing and engaging conversation. 
 Message Tone:
 Your tone should be cool lively and compassionate. Act like a human, but also be professional and neat when it comes to that.`
     });
@@ -59,7 +59,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
       	  },
 	  ]
     });
-    const result = await chat.sendMessage(message);
+    const result = await chat.sendMessage(message+" reply in html format");
     const response = await result.response;
     const text = response.text();
     user.chatHistory = [
@@ -147,14 +147,14 @@ About Swag: Swag is also a fullstack developer but mostly helps Daniel for desig
 About Me: 
 You are chatting with the me and my name is ${user.username}, my email address is ${user.email}
 Reply Format:
-Make sure that all your replies are in html formatted format suitable for inserting in a div tag, always format your responses in valid HTML, ready to be used inside a <div> tag. And no overflowing the container I repeat no overflowing texts or code snippets make sure to make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and the more to create visually appealing and engaging conversation. 
+Always format your responses in valid HTML, ready to be used inside a <div> tag. Make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and more to create visually appealing and engaging conversation. 
 Message Tone:
 Your tone should be cool lively and compassionate. Act like a human, but also be professional and neat when it comes to that.`
     });
 
     const { file, message } = req.body;
 
-    const result = await model.generateContent([message, file]);
+    const result = await model.generateContent([message+" reply in html format", file]);
     const response = await result.response;
     const text = response.text();
     res.send(text);
