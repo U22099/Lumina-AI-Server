@@ -8,7 +8,7 @@ const logOut = async (req, res) => {
   if (user) {
     user.refreshToken = "";
     user.accessToken = "";
-    await user.save();
+    await user.update({accessToken, refreshToken});
     /*res.cookie("refreshToken", "", {
       httpOnly: true,
       sameSite: "None",

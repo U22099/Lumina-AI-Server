@@ -18,7 +18,7 @@ const clearChats = async (req, res) => {
   const user = await User.findOne({ accessToken });
   if (user) {
     user.chatHistory = [];
-	 await user.save();
+    await user.update({chatHistory});
     res.sendStatus(200);
   } else {
     res.status(401).json({ message: "Wrong Token" });
@@ -73,7 +73,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
         parts: [{ text }],
       },
     ];
-    await user.save();
+    await user.update({chatHistory});
     res.send(text);
   } else {
     res.status(401).json({ message: "Wrong Token" });
@@ -121,7 +121,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 	if(user.voiceHistory.length > 120){
 		user.voiceHistory = user.voiceHistory.slice(-120);
 	}
-    await user.save();
+    await user.update({chatHistory});
     res.send(text);
   } else {
     res.status(401).json({ message: "Wrong Token" });
