@@ -31,7 +31,6 @@ const handleLogin = async (req, res) => {
         { expiresIn: "30d" }
       );
 
-      user.refreshToken = refreshToken;
       /*res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         sameSite: "None",
@@ -39,8 +38,9 @@ const handleLogin = async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });*/
     }
+    user.refreshToken = refreshToken;
     user.accessToken = accessToken;
-    await user.save();
+    await user.update({accessToken, refreshToken});
     /*res.cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "None",

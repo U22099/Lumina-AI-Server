@@ -4,7 +4,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const getChats = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const user = await User.findOne({ accessToken });
   if (user) {
     const history = user.chatHistory;
     res.json({ history });
@@ -15,7 +15,7 @@ const getChats = async (req, res) => {
 const clearChats = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const user = await User.findOne({ accessToken });
   if (user) {
     user.chatHistory = [];
 	 await user.save();
@@ -27,7 +27,7 @@ const clearChats = async (req, res) => {
 const TextPrompt = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const user = await User.findOne({ accessToken });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -82,7 +82,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 const VoicePrompt = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const user = await User.findOne({ accessToken });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -131,7 +131,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 const FilePrompt = async (req, res) => {
   const accessToken = req.query.token;
   if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const user = await User.findOne({ accessToken });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 

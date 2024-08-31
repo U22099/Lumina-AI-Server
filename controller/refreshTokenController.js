@@ -4,7 +4,7 @@ const User = require("../model/User");
 const handleRefreshToken = async (req, res) => {
   const refreshToken = req.query.token;
   if (!refreshToken) return res.sendStatus(401);
-  const user = await User.findOne({ refreshToken: refreshToken });
+  const user = await User.findOne({ refreshToken });
 
   if (!user) return res.sendStatus(403);
 
