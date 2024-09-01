@@ -129,6 +129,10 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 };
 
 const FilePrompt = async (req, res) => {
+    const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
+  if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
 	    model: "gemini-1.5-flash",
@@ -154,6 +158,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
     const response = await result.response;
     const text = response.text();
     res.send(text);
+  }
 };
 
 module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, FilePrompt };
