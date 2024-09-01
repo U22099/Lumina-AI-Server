@@ -19,7 +19,7 @@ const updateImage = async (req, res) => {
   const user = await User.findOne({ accessToken: accessToken });
   if (user) {
     user.image = req.body.image;
-    await user.update({image});
+    await user.save();
     res.sendStatus(200);
   } else {
     res.sendStatus(403);

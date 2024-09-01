@@ -40,7 +40,7 @@ const handleLogin = async (req, res) => {
     }
     user.refreshToken = refreshToken;
     user.accessToken = accessToken;
-    await user.update({accessToken, refreshToken});
+    await user.save();
     /*res.cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "None",

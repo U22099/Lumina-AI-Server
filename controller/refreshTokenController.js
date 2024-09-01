@@ -19,7 +19,7 @@ const handleRefreshToken = async (req, res) => {
         { expiresIn: "1d" }
       );
       user.accessToken = accessToken;
-      await user.update({accessToken});
+      await user.save();
       /*res.cookie("accessToken", accessToken, {
         httpOnly: true,
         sameSite: "None",

@@ -19,7 +19,7 @@ const sendEmail = async (req, res) => {
   const password = generateRandomPassword();
   const hash = await bcrypt.hash(password, 10);
   user.password = hash;
-  await user.update({password});
+  await user.save();
   let transportMail = nodemailer.createTransport({
     service: "gmail",
     auth: {
