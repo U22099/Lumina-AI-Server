@@ -51,7 +51,7 @@ const handleNewUser = async (req, res) => {
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });*/
-    res.json({accessToken, refreshToken, newUser._id});
+    res.json({accessToken, refreshToken, _id: newUser._id});
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
