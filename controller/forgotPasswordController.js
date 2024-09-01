@@ -12,7 +12,7 @@ const generateRandomPassword = () => {
 };
 const sendEmail = async (req, res) => {
   const email = req.body.input;
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email });
   if (!user)
     return res.status(401).json({ message: "No user found for this email" });
 

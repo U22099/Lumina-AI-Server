@@ -31,7 +31,7 @@ const handleNewUser = async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "30d" }
     );
-    await User.create({
+    const newUser = await User.create({
       username: username,
       email: email,
       password: hashedpwd,
@@ -51,7 +51,7 @@ const handleNewUser = async (req, res) => {
       secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });*/
-    res.json({accessToken, refreshToken});
+    res.json({accessToken, refreshToken, newUser._id});
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });

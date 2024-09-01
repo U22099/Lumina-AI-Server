@@ -49,7 +49,8 @@ const handleLogin = async (req, res) => {
     });*/
     res.json({
       accessToken, 
-      refreshToken
+      refreshToken,
+      _id: user. _id
     });
   } else {
     res.status(401).json({ message: "Incorrect Password" });

@@ -2,9 +2,9 @@ const User = require("../model/User");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const getChats = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     const history = user.chatHistory;
     res.json({ history });
@@ -13,21 +13,21 @@ const getChats = async (req, res) => {
   }
 };
 const clearChats = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     user.chatHistory = [];
     await user.save();
     res.sendStatus(200);
   } else {
-    res.status(401).json({ message: "Wrong Token" });
+    res.status(401).json({ message: "Wrong ID" });
   }
 };
 const TextPrompt = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -76,13 +76,13 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
     await user.save();
     res.send(text);
   } else {
-    res.status(401).json({ message: "Wrong Token" });
+    res.status(401).json({ message: "Wrong ID" });
   }
 };
 const VoicePrompt = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -124,14 +124,14 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
     await user.save();
     res.send(text);
   } else {
-    res.status(401).json({ message: "Wrong Token" });
+    res.status(401).json({ message: "Wrong ID" });
   }
 };
 
 const FilePrompt = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 

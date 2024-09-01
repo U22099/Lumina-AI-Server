@@ -1,9 +1,9 @@
 const User = require("../model/User");
 
 const getData = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     res.json({
       username: user.username,
@@ -14,9 +14,9 @@ const getData = async (req, res) => {
   }
 };
 const updateImage = async (req, res) => {
-  const accessToken = req.query.token;
-  if (!accessToken) return res.sendStatus(401);
-  const user = await User.findOne({ accessToken: accessToken });
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id });
   if (user) {
     user.image = req.body.image;
     await user.save();
@@ -27,9 +27,9 @@ const updateImage = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   try {
-    const accessToken = req.query.token;
-    if (!accessToken) return res.sendStatus(401);
-    const user = await User.findOneAndDelete({ accessToken: accessToken });
+    const _id = req.query._id;
+    if (!_id) return res.sendStatus(401);
+    const user = await User.findOneAndDelete({ _id });
     return res.sendStatus(200);
   } catch (err) {
     console.log(err);
