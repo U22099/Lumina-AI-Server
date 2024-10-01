@@ -5,19 +5,21 @@ const jwt = require("jsonwebtoken");
 const handleNewUser = async (req, res) => {
   const { username, email, password, image } = req.body;
 
-  if (!username || !email || !password)
+  if (!username || !email || !password){
     return res
       .status(401)
       .json({ message: "Username, Email and Password must be provided" });
-
+  }
+  
   const user = await User.findOne({
     $or: [{ username: username }, { email: email }],
   });
-  if (user)
+  if (user){
     return res
       .status(409)
       .json({ message: "Username or Email already exists" });
-
+  }
+  
   try {
     const hashedpwd = await bcrypt.hash(password, 10);
 

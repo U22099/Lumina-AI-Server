@@ -5,16 +5,18 @@ const bcrypt = require("bcrypt");
 const handleLogin = async (req, res) => {
   const { input, password, rememberMe } = req.body;
 
-  if (!input || !password)
+  if (!input || !password){
     return res
       .status(403)
       .json({ message: "Username Or Email and Password is required" });
-
+  }
+  
   const user = await User.findOne({
     $or: [{ username: input }, { email: input }],
   });
-  if (!user)
+  if (!user){
     return res.status(401).json({ message: "Username or Email not found" });
+  }
 
   const match = await bcrypt.compare(password, user.password);
   if (match) {
