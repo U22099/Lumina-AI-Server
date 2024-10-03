@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+const mongoose = require("mongoose");
 
 const handleRefreshToken = async (req, res) => {
   const refreshToken = req.query.token;
   const _id = req.query._id
   if (!refreshToken || !_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id });
+  const user = await User.findOne({ mongoose.Types.ObjectId(_id) });
 
   if (!user) return res.sendStatus(403);
 
