@@ -5,7 +5,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const getChats = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const history = user.chatHistory;
     res.json({ history });
@@ -16,7 +16,7 @@ const getChats = async (req, res) => {
 const clearChats = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     user.chatHistory = [];
     await user.save();
@@ -28,7 +28,7 @@ const clearChats = async (req, res) => {
 const TextPrompt = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -82,7 +82,7 @@ Always format your responses in valid HTML, ready to be used inside a <div> tag.
 const VoicePrompt = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
@@ -130,7 +130,7 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 const FilePrompt = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 

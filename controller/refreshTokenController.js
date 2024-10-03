@@ -6,7 +6,7 @@ const handleRefreshToken = async (req, res) => {
   const refreshToken = req.query.token;
   const _id = req.query._id
   if (!refreshToken || !_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
 
   if (!user) return res.sendStatus(403);
 

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const getData = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     res.json({
       username: user.username,
@@ -17,7 +17,7 @@ const getData = async (req, res) => {
 const updateImage = async (req, res) => {
   const _id = req.query._id;
   if (!_id) return res.sendStatus(401);
-  const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     user.image = req.body.image;
     await user.save();
@@ -30,7 +30,7 @@ const deleteUser = async (req, res) => {
   try {
     const _id = req.query._id;
     if (!_id) return res.sendStatus(401);
-    const user = await User.findOne({ _id: mongoose.Types.ObjectId(_id) });
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
     return res.sendStatus(200);
   } catch (err) {
     console.log(err);
