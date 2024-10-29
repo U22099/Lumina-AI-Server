@@ -1,6 +1,7 @@
 const User = require("../model/User");
 const mongoose = require("mongoose");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const OpenAI = require("openai");
 
 const getChats = async (req, res) => {
   const _id = req.query._id;
@@ -31,9 +32,9 @@ const TextPrompt = async (req, res) => {
   const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ 
-	    model: "gemini-1.5-flash-002",
-	    systemInstruction: `About You: Your name is Lumina, a multi-modal highly intelligent and knowledgeable AI with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-002",
+      systemInstruction: `About You: Your name is Lumina, a multi-modal highly intelligent and knowledgeable AI with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
 	    About The Developer: Daniel is a fullstack web developer that uses MERN stack, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
 his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his phone number is '+2349033572229' also his whatsapp number,
@@ -47,15 +48,15 @@ You are chatting with me and my name is ${user.username}, my email address is ${
 Message Tone:
 Your tone should be cool lively and compassionate. Act like a human, but also be professional and neat when it comes to that.`
     });
-/*Reply Format:
-Always format your responses in valid HTML, ready to be used inside a <div> tag. Make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and more to create visually appealing and engaging conversation. if your response contains a code wrap it in a <code></code> block and make use of html entities like &lt; &gt; &amp; &quot; &#39; &#x2F; &#x60; to represent special characters like < > & " ' / \`.*/
+    /*Reply Format:
+    Always format your responses in valid HTML, ready to be used inside a <div> tag. Make use of html formatting tags like <strong> <br> <i> <code> <pre> <sub> <sup> <strike> <u> and more to create visually appealing and engaging conversation. if your response contains a code wrap it in a <code></code> block and make use of html entities like &lt; &gt; &amp; &quot; &#39; &#x2F; &#x60; to represent special characters like < > & " ' / \`.*/
     const { message } = req.body;
     const chat = model.startChat({
       history: [
 	      ...user.chatHistory,
-		  {
-        	role: "user",
-        	parts: [{ text: message }],
+        {
+          role: "user",
+          parts: [{ text: message }],
       	  },
 	  ]
     });
@@ -66,7 +67,7 @@ Always format your responses in valid HTML, ready to be used inside a <div> tag.
       ...user.chatHistory,
       {
         role: "user",
-        parts: [{ text: message}],
+        parts: [{ text: message }],
       },
       {
         role: "model",
@@ -85,9 +86,9 @@ const VoicePrompt = async (req, res) => {
   const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ 
-	    model: "gemini-1.5-flash-002",
-	    systemInstruction: `About You: Your name is Lumina, a text-based highly intelligent and knowledgeable AI programmed by Daniel using gemini api, Although you can process and only reply in text Daniel was able to get a workaround by converting your text replies to voice output using speechSynthesis and he also used the react-speech-recognition library to convert user;s voice input to text before sending it to you so on the outside he made it look like the user is directly talking with you which is soo cool. He was assisted by a designer named Swag. 
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-002",
+      systemInstruction: `About You: Your name is Lumina, a text-based highly intelligent and knowledgeable AI programmed by Daniel using gemini api, Although you can process and only reply in text Daniel was able to get a workaround by converting your text replies to voice output using speechSynthesis and he also used the react-speech-recognition library to convert user;s voice input to text before sending it to you so on the outside he made it look like the user is directly talking with you which is soo cool. He was assisted by a designer named Swag. 
 	    About The Developer: Daniel is a fullstack web developer that uses MERN stack and he also designed you, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
 his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his phone number is '+2349033572229' also his whatsapp number,
@@ -117,9 +118,9 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
         parts: [{ text }],
       },
     ];
-	if(user.voiceHistory.length > 120){
-		user.voiceHistory = user.voiceHistory.slice(-120);
-	}
+    if (user.voiceHistory.length > 120) {
+      user.voiceHistory = user.voiceHistory.slice(-120);
+    }
     await user.save();
     res.send(text);
   } else {
@@ -133,9 +134,9 @@ const FilePrompt = async (req, res) => {
   const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ 
-	    model: "gemini-1.5-flash-002",
-	    systemInstruction: `About You: Your name is Lumina, a multi-modal highly intelligent and knowledgeable AI with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-002",
+      systemInstruction: `About You: Your name is Lumina, a multi-modal highly intelligent and knowledgeable AI with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
 	    About The Developer: Daniel is a fullstack web developer that uses MERN stack, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
 his email is 'nifemiolaniyi4@gmail.com' and also 'u22099dandev@gmail.com', his phone number is '+2349033572229' also his whatsapp number,
@@ -158,4 +159,21 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
   }
 };
 
-module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, FilePrompt };
+const GenerateImage = async (req, res) => {
+  const _id = req.query._id;
+  if (!_id) return res.sendStatus(401);
+  const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
+  if (user) {
+    try {
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY});
+
+      const image = await openai.images.generate({ prompt: req.body.message });
+      console.log(image.data);
+      res.send(image.data[0].url);
+    } catch (e) { console.log(e.message) }
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+module.exports = { getChats, clearChats, TextPrompt, VoicePrompt, FilePrompt, GenerateImage };
