@@ -165,9 +165,13 @@ const GenerateImage = async (req, res) => {
   const user = await User.findOne({ _id: new mongoose.Types.ObjectId(_id) });
   if (user) {
     try {
-      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY});
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-      const image = await openai.images.generate({ prompt: req.body.message });
+      const image = await openai.images.generate({
+        model: "dall-e-2",
+        n: 1,
+        prompt: req.body.message
+      });
       console.log(image.data);
       res.send(image.data[0].url);
     } catch (e) { console.log(e.message) }
