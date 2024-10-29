@@ -172,12 +172,11 @@ const GenerateImage = async (req, res) => {
 
       const image = await openai.images.generate({
         model: "dall-e-2",
-        n: 1,
         prompt: req.body.message
       });
       console.log(image.data);
       res.send(image.data[0].url);
-    } catch (e) { console.log(e.message) }
+    } catch (e) { console.log(e) }
   } else {
     res.sendStatus(401);
   }
