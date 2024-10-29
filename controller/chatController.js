@@ -167,7 +167,7 @@ const GenerateImage = async (req, res) => {
     try {
       const openai = new OpenAI({
         organisation: "org-gbpju9xhJLv8kI6WTAwI7UA6",
-        project: "proj_t8kwOtxz6uGBFL3fB6Dj8oh",
+        project: "proj_t8kwOtxz6uGBFL3fB6Dj8ohe",
         apiKey: process.env.OPENAI_API_KEY });
 
       const image = await openai.images.generate({
