@@ -60,22 +60,27 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
       	  },
 	  ]
     });
-    const result = await chat.sendMessage(message);
-    const response = await result.response;
-    const text = response.text();
-    user.chatHistory = [
+    try {
+      const result = await chat.sendMessage(message);
+      const response = await result.response;
+      const text = response.text();
+      user.chatHistory = [
       ...user.chatHistory,
-      {
-        role: "user",
-        parts: [{ text: message }],
+        {
+          role: "user",
+          parts: [{ text: message }],
       },
-      {
-        role: "model",
-        parts: [{ text }],
+        {
+          role: "model",
+          parts: [{ text }],
       },
     ];
-    await user.save();
-    res.send(text);
+      await user.save();
+      res.send(text);
+    } catch (err) {
+      console.log(err)
+      res.sendStatus(500);
+    }
   } else {
     res.status(401).json({ message: "Wrong ID" });
   }
@@ -108,21 +113,26 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
     const chat = model.startChat({
       history: user.voiceHistory
     });
-    const result = await chat.sendMessage(message);
-    const response = await result.response;
-    const text = response.text();
-    user.voiceHistory = [
+    try {
+      const result = await chat.sendMessage(message);
+      const response = await result.response;
+      const text = response.text();
+      user.voiceHistory = [
       ...user.voiceHistory,
-      {
-        role: "model",
-        parts: [{ text }],
+        {
+          role: "model",
+          parts: [{ text }],
       },
     ];
-    if (user.voiceHistory.length > 120) {
-      user.voiceHistory = user.voiceHistory.slice(-120);
+      if (user.voiceHistory.length > 120) {
+        user.voiceHistory = user.voiceHistory.slice(-120);
+      }
+      await user.save();
+      res.send(text);
+    } catch (err) {
+      console.log(err)
+      res.sendStatus(500);
     }
-    await user.save();
-    res.send(text);
   } else {
     res.status(401).json({ message: "Wrong ID" });
   }
@@ -152,10 +162,15 @@ Your tone should be cool lively and compassionate. Act like a human, but also be
 
     const { file, message } = req.body;
 
-    const result = await model.generateContent([message, file]);
-    const response = await result.response;
-    const text = response.text();
-    res.send(text);
+    try {
+      const result = await model.generateContent([message, file]);
+      const response = await result.response;
+      const text = response.text();
+      res.send(text);
+    } catch (err) {
+      console.log(err)
+      res.sendStatus(500);
+    }
   }
 };
 
