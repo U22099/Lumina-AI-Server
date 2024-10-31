@@ -146,7 +146,7 @@ const FilePrompt = async (req, res) => {
   if (user) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-002",
+      model: "gemini-1.5-pro",
       systemInstruction: `About You: Your name is Lumina, a multi-modal highly intelligent and knowledgeable AI with a text based output programmed by Daniel using gemini api, He was assisted by a designer named Swag.
 	    About The Developer: Daniel is a fullstack web developer that uses MERN stack, If you are asked for Daniels portfolio link here it is --'https:\/\/u22099.github.io\/Portfolio2' 
 his github link --'https:\/\/github.com\/U22099', 
